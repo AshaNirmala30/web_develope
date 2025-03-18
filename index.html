@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Virtual Bus Tour - Explore the bus interior and seating arrangement before booking.">
+    <title>Virtual Bus Tour</title>
+
+    <!-- Link to Panellum CSS for styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/dist/pannellum.min.css">
+
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Virtual tour container */
+        #panorama {
+            width: 100%;
+            height: 500px;
+            margin: 20px 0;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .footer p {
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Virtual Bus Tour</h1>
+        <p>Explore the bus interior and seating arrangement before booking your next ride!</p>
+
+        <!-- Virtual 360-degree Tour Container -->
+        <div id="panorama"></div>
+
+        <div class="description">
+            <p>Use your mouse or touch screen to explore the bus interior and choose your seat. Click and drag to look around or use the controls to zoom in and out.</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Virtual Bus Tours. All rights reserved.</p>
+    </div>
+
+    <!-- Include Panellum JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/dist/pannellum.min.js"></script>
+
+    <script>
+        // Initialize Panellum with a 360-degree bus interior image
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "your-360-image.jpg", // Replace with your 360-degree bus image path
+            "autoLoad": true,
+            "showControls": true,
+            "hotSpots": [{
+                "pitch": 10,
+                "yaw": 45,
+                "type": "info",
+                "text": "This is your seating area. Select your seat here.",
+                "url": "#"
+            }]
+        });
+    </script>
+</body>
+
+</html>
