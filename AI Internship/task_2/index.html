@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Route Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .review-form {
+            margin-top: 20px;
+        }
+        .review-form input, .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .review-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .review-form button:hover {
+            background-color: #45a049;
+        }
+        .reviews-section {
+            margin-top: 40px;
+        }
+        .review-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .review-item .rating {
+            font-size: 18px;
+            color: #ffa500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bus Route 42 - User Reviews</h1>
+        
+        <div class="review-form">
+            <h3>Rate and Review the Bus Route</h3>
+            <form id="reviewForm">
+                <label for="rating">Rating (1-5):</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Average Rating: <span id="averageRating">4.5</span>/5</h3>
+            <div id="reviewsList">
+                <!-- Reviews will be inserted here -->
+                <div class="review-item">
+                    <p class="rating">Rating: 5/5</p>
+                    <p>Great experience! The bus was on time and comfortable.</p>
+                </div>
+                <div class="review-item">
+                    <p class="rating">Rating: 4/5</p>
+                    <p>Good service, but could improve cleanliness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example data for ratings and reviews
+        const reviews = [
+            { rating: 5, review: "Great experience! The bus was on time and comfortable." },
+            { rating: 4, review: "Good service, but could improve cleanliness." },
+        ];
+
+        // Function to calculate and display the average rating
+        function calculateAverageRating() {
+            const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+            const average = totalRating / reviews.length;
+            document.getElementById("averageRating").textContent = average.toFixed(1);
+        }
+
+        // Function to display reviews
+        function displayReviews() {
+            const reviewsList = document.getElementById("reviewsList");
+            reviewsList.innerHTML = ""; // Clear the existing reviews
+
+            reviews.forEach(review => {
+                const reviewItem = document.createElement("div");
+                reviewItem.classList.add("review-item");
+
+                const rating = document.createElement("p");
+                rating.classList.add("rating");
+                rating.textContent = `Rating: ${review.rating}/5`;
+
+                const reviewText = document.createElement("p");
+                reviewText.textContent = review.review;
+
+                reviewItem.appendChild(rating);
+                reviewItem.appendChild(reviewText);
+
+                reviewsList.appendChild(reviewItem);
+            });
+        }
+
+        // Handle form submission
+        document.getElementById("reviewForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const rating = parseInt(document.getElementById("rating").value);
+            const reviewText = document.getElementById("review").value;
+
+            // Add the new review to the reviews array
+            reviews.push({ rating, review: reviewText });
+
+            // Recalculate and display the average rating
+            calculateAverageRating();
+
+            // Display the updated reviews
+            displayReviews();
+
+            // Reset the form
+            document.getElementById("reviewForm").reset();
+        });
+
+        // Initialize the page with existing reviews and average rating
+        calculateAverageRating();
+        displayReviews();
+    </script>
+
+</body>
+</html>
